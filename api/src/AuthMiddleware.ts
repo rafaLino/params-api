@@ -1,7 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-dotenv.config();
 
 export default function AuthMiddleware(req: Request, response: Response, next: NextFunction) {
     const token = req.headers['x-api-key'] as string | null;
