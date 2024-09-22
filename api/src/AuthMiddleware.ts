@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 export default function AuthMiddleware(req: Request, response: Response, next: NextFunction) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.headers['x-api-key'] as string | null;
     if (!token) {
         return response.status(401)
             .json({
