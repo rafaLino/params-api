@@ -10,7 +10,7 @@ export default function AuthMiddleware(req: Request, response: Response, next: N
             });
     }
     try {
-        jwt.verify(token, process.env.JWT_SECRET!);
+        jwt.verify(token, process.env.JWT_SECRET ?? '');
         return next();
     } catch {
         // bad token

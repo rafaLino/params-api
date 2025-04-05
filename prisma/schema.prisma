@@ -9,15 +9,18 @@ generator client {
 }
 
 model Parameter {
-  id    Int    @id() @default(autoincrement())
+  id           Int    @id() @default(autoincrement())
   /// @length(1, 256)
-  name  String @unique()
-  value String
+  name         String @unique()
+  value        String
   /// @length(1, 256)
-  type  String
+  type         String
+  /// @length(1, 256)
+  project_name String
 }
 
 model Version {
-  id    Int @id() @default(autoincrement())
-  value Int @default(0)
+  id           Int    @id() @default(autoincrement())
+  value        Int    @default(0)
+  project_name String @unique
 }

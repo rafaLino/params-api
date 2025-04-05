@@ -9,11 +9,11 @@ export class Notification {
         this.statusCode = statusCode
     }
 
-    static success(data: unknown = null, statusCode: number = 200) {
+    static success(data: unknown = null, statusCode = 200) {
         return new Notification(data, false, statusCode);
     }
 
-    static fail(message: string | Array<string>, statusCode: number = 400) {
+    static fail(message: string | Array<string>, statusCode = 400) {
         return new Notification(message, true, statusCode);
     }
 }

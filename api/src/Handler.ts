@@ -1,4 +1,4 @@
-import { Notification } from "./Notification";
+import type { Notification } from "./Notification";
 import type { Request, Response } from 'express';
 
 export function handler(action: (request: Request) => Promise<Notification>) {
@@ -11,9 +11,10 @@ export function handler(action: (request: Request) => Promise<Notification>) {
                     data: notification.data
                 });
 
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : "Something went wrong!"
             return res.status(500).json({
-                data: { message: error.message }
+                data: { message: errorMessage }
             })
         }
     }
