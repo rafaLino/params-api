@@ -13,39 +13,57 @@ export default function config(router: Router) {
     }));
 
 
-    router.get('/parameter/:id', handler(async (request) => {
-        if (!request.params.id) {
+    router.get('/parameters/:id_or_name', handler(async (request) => {
+        if (!request.params.id_or_name) {
             return Notification.fail('not found')
         }
 
+        const idOrName = request.params.id_or_name;
+        const isName = Number.isNaN(Number(idOrName));
+        const where = isName
+            ? { name: normalizeName(idOrName) }
+            : { id: Number(idOrName) };
+
         const parameter = await prisma.parameter.findUnique({
-            where: { id: Number(request.params.id) }
+            where
         });
 
         return Notification.success(parameter);
     }))
 
-    router.post('/parameter', handler(async (request) => {
+
+    router.post('/parameters', handler(async (request) => {
         if (!isValid(request.body)) {
             return Notification.fail('the body is not valid');
         }
 
         const { name, type, value } = request.body
 
-        const parameter = await prisma.parameter.create({
-            data: {
-                name: normalizeName(name),
+        const normalizedName = normalizeName(name);
+
+        const parameter = await prisma.parameter.upsert({
+            where: {
+                name: normalizedName,
+                project_name: request.projectKey as string
+            },
+            create: {
+                name: normalizedName,
                 type,
                 value,
                 project_name: request.projectKey as string
             },
+            update: {
+                name: normalizedName,
+                type,
+                value
+            },
             select: { id: true }
         });
 
-        return Notification.success(parameter.id, 201);
+        return Notification.success(parameter.id, 200);
     }))
 
-    router.put('/parameter/:id', handler(async (request) => {
+    router.put('/parameters/:id', handler(async (request) => {
         const errors: Array<string> = [];
         if (!isValid(request.body)) {
             errors.push('the body is not valid');
@@ -76,7 +94,7 @@ export default function config(router: Router) {
         return Notification.success(null);
     }));
 
-    router.delete('/parameter/:id', handler(async (request) => {
+    router.delete('/parameters/:id', handler(async (request) => {
         if (!request.params.id) {
             return Notification.fail('not found')
         }
