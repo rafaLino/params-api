@@ -27,7 +27,7 @@ The API returns the followings structure:
 Return Type : `Array<Parameter>` | `Parameter` | `number` | `Array<string>` | `Error`
 ```typescript
  {
-    data: `Array<Parameter>` | `Parameter` | `number` | `Array<string>` | `Error`
+    data: Array<Parameter> | Parameter | number | Array<string> | Error
  }
 ```
 
