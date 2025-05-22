@@ -24,10 +24,10 @@ The API provides version tracking through two methods:
 ### Returns
 The API returns the followings structure: 
 
-Return Type (T): `Array<Parameter>` | `Parameter` | `number` | `Array<string>` | `Error`
-```json
+Return Type : `Array<Parameter>` | `Parameter` | `number` | `Array<string>` | `Error`
+```typescript
  {
-    "data": T
+    data: `Array<Parameter>` | `Parameter` | `number` | `Array<string>` | `Error`
  }
 ```
 
