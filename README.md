@@ -27,7 +27,7 @@ The API returns the followings structure:
 Return Type (T): `Array<Parameter>` | `Parameter` | `number` | `Array<string>` | `Error`
 ```json
  {
-    data: T
+    "data": T
  }
 ```
 
