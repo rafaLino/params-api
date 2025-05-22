@@ -52,7 +52,7 @@ Ensure that each request includes both headers for proper authorization and acce
   - `type`: String, required. The type expected for the value (e.g., "string", "number").
   - `value`: String, required. The current value.
 
-  ```json
+  ```javascript
     POST /parameters {
         name: "my_parameter",
         type: "string",
@@ -70,7 +70,7 @@ Ensure that each request includes both headers for proper authorization and acce
     - The found item
    
 
-    ```json
+    ```javascript
     //get list
     GET /parameters
     
@@ -83,7 +83,7 @@ Ensure that each request includes both headers for proper authorization and acce
 - **Parameters**: 
     - `id`: Number, required. The id of the parameter.
     
-  ```json
+  ```javascript
     PUT /parameters/1 {
         name: "my_parameter",
         type: "string",
@@ -94,12 +94,9 @@ Ensure that each request includes both headers for proper authorization and acce
 - **Method**: DELETE
 - **Parameters**: 
     - `id`: Number, required. The id of the parameter.
-- **body**:
-  - `name`: String, required. The name of the parameter.
-  - `type`: String, required. The type expected for the value (e.g., "string", "number").
-  - `value`: String, required. The current value.
-
-  ```json
+ 
+ 
+  ```javascript
     DELETE /parameters/1
   ```
 
@@ -110,14 +107,14 @@ Ensure that each request includes both headers for proper authorization and acce
 
 ### GET /version
 Returns the current version of the system as a number. Example:
-```bash
-GET http://localhost:8000/version
+```javascript
+GET /version
 ```
 
 ### POST /version
 Increments the new version number.
-```bash
-POST http://localhost:8000/version
+```javascript
+POST /version
 ```
 
 ---
